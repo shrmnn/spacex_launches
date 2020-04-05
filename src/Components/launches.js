@@ -27,6 +27,25 @@ export const getNextLaunch = () => {
 
 };
 
+export const getLaunchDate = (timerDate) => {
+    const now = new Date().getTime();
+    const distance = timerDate - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    return [days, hours, minutes, seconds, distance];
+};
+
+export const getTimeDate = (launch) => {
+    const date = launch['years'] + ' '
+        + launch['months'] + ' '
+        + launch['date'] + ' '
+        + launch['hours'] + ':'
+        + launch['minutes'];
+    return date;
+};
+
 let Launches = (id) => {
     //console.log(JSON.stringify(launches));
     /*console.log(launches['default'][id]['mission']);

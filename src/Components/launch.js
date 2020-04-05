@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {getLaunchDate, getTimeDate} from "./launches";
 
 
 let Launch = (props) => {
@@ -7,32 +8,33 @@ let Launch = (props) => {
 
     let launch = props['launch'];
 
-    let date = launch['launch']['years'] + ' '
-        + launch['launch']['months'] + ' '
-        + launch['launch']['date'] + ' '
-        + launch['launch']['hours'] + ':'
-        + launch['launch']['minutes'];
+    let date = getTimeDate(launch['launch']);
 
     const timerDate = new Date(date).getTime();
-    const x = setInterval(function () {
-        const now = new Date().getTime();
-        const distance = timerDate - now;
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        const distanceTime = Math.abs(days) + 'д ' + Math.abs(hours) + 'ч ' + Math.abs(minutes) + 'м ' + Math.abs(seconds) + 'с';
-        if (!distance) {
-            setTime('В ' + launch['launch']['years'] + ' году');
-        } else if (distance < 0) {
-            setTime(distanceTime + ' назад');
-            setClass('expired');
-        } else {
-            setTime(date + '\n' + distanceTime);
-        }
+    useEffect(() => {
+            const x = setInterval(function () {
+                const [days, hours, minutes, seconds, distance] = getLaunchDate(timerDate);
 
-    }, 1000);
+                const distanceTime = Math.abs(days) + ' д '
+                    + Math.abs(hours) + ' ч '
+                    + Math.abs(minutes) + ' м '
+                    + Math.abs(seconds) + ' с';
+                if (!distance) {
+                    setTime('В ' + launch['launch']['years'] + ' году');
+                    setClass('unknown');
+                } else if (distance < 0) {
+                    setTime(distanceTime + ' назад');
+                    setClass('expired');
+                } else {
+                    setTime(distanceTime);
+                }
+
+            }, 1000);
+            return () => clearInterval(x);
+        }, []
+    );
+
 
     return (
         <div className='bLaunch'>
@@ -40,9 +42,11 @@ let Launch = (props) => {
             <div className='bTitle'>
                 <p className='pMission'>{launch['mission']}</p>
                 <p className='pLocation'>{launch['location']}</p>
-                {addClass ? <p className='pExpired'>Завершено</p> : ''}
+                {addClass === 'expired' ? <p className='pExpired'>Завершено</p> : ''}
             </div>
-            <p className='pLaunchTime'>{time}</p>
+            <p className='pLaunchTime'>
+                {!addClass ? date : ''} <br/>
+                {time}</p>
         </div>
     );
 };

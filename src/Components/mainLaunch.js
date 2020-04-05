@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './mainLaunch.css';
-import Launches, {getNextLaunch} from "./launches";
+import Launches, {getNextLaunch, getLaunchDate, getTimeDate} from "./launches";
 
 const MainLaunch = () => {
     getNextLaunch();
@@ -8,26 +8,18 @@ const MainLaunch = () => {
 
     const [time, setTime] = useState([]);
 
-
-    let date = mainLaunch['launch']['years'] + ' '
-        + mainLaunch['launch']['months'] + ' '
-        + mainLaunch['launch']['date'] + ' '
-        + mainLaunch['launch']['hours'] + ':'
-        + mainLaunch['launch']['minutes'];
+    let date = getTimeDate(mainLaunch['launch']);
 
     const timerDate = new Date(date).getTime();
-    const x = setInterval(function () {
-        const now = new Date().getTime();
-        const distance = timerDate - now;
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    useEffect(() => {
+            const x = setInterval(function () {
+                const [days, hours, minutes, seconds] = getLaunchDate(timerDate);
+                setTime([days, hours, minutes, seconds]);
+            }, 1000);
+            return () => clearInterval(x);
+        }, []
+    );
 
-        setTime([days, hours, minutes, seconds]);
-
-
-    }, 1000);
 
     return (
         <div className='bMainLaunch'>
