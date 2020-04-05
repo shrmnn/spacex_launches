@@ -1,0 +1,34 @@
+.bLaunchList {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.bLaunch {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.pMission {
+    background: #61dafb;
+    display: inherit;
+    justify-content: flex-start;
+    font-size: 1.5em;
+}
+
+.pLaunchTime {
+    font-weight: bold;
+}
+
+.pVehicle {
+    color: black;
+}
+
+.pLocation {
+    background: #282c34;
+    display: inherit;
+    color: ghostwhite;
+    justify-content: flex-end;
+}
+
