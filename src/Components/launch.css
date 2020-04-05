@@ -1,34 +1,69 @@
 .bLaunchList {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     width: 80%;
 }
 
 .bLaunch {
+    background: url('https://images.unsplash.com/photo-1541186877-bb5a745edde5') no-repeat center center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    justify-content: space-between;
+    color: ghostwhite;
+    width: 300px;
+    height: 300px;
+    margin: 20px 0 20px 0;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+
+.bTitle {
+    justify-content: center;
 }
 
 .pMission {
-    background: #61dafb;
-    display: inherit;
-    justify-content: flex-start;
+    justify-content: center;
     font-size: 1.5em;
+    font-weight: bold;
+    margin: 0;
 }
 
 .pLaunchTime {
     font-weight: bold;
+    font-size: 1.5em;
 }
 
 .pVehicle {
-    color: black;
+    text-align: start;
+    display: inline;
+    background: #262626;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 3px;
+    margin: 0;
+    align-content: start;
+    width: fit-content;
+    border-radius: 0 0 5px;
+
 }
 
 .pLocation {
-    background: #282c34;
     display: inherit;
-    color: ghostwhite;
-    justify-content: flex-end;
+    font-weight: lighter;
+    justify-content: center;
+    margin: 0;
 }
 
+.pExpired {
+    display: inline-block;
+    border: 1px solid red;
+    border-radius: 3px;
+    font-weight: bold;
+    color: red;
+    box-sizing: border-box;
+    padding: 5px;
+    backdrop-filter: blur(3px);
+}

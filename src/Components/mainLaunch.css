@@ -1,0 +1,58 @@
+.bMainLaunch {
+    width: 100%;
+    height: 40vh;
+    background: url('https://images.unsplash.com/photo-1457364983758-510f8afa9f5f') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+    color: ghostwhite;
+}
+
+.bDate {
+    display: flex;
+    font-size: 5em;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1 1 auto;
+}
+
+.bDate p {
+    margin: 0;
+}
+
+.mPeriod {
+    font-size: 1vw;
+}
+
+.bMainTitle {
+    background: #262626;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    width: 100%;
+}
+
+.bLeftPanel {
+    display: inherit;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 4vw;
+}
+
+.bRightPanel {
+    display: inherit;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 2vw;
+}
+
+#idTitle,
+#idVehicle,
+#idLocation {
+    display: flex;
+    margin: 0 10px 0 10px;
+}
+

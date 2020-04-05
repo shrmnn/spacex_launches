@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Launchlist from "./Components/launchlist";
+import MainLaunch from './Components/mainLaunch';
 
 let App = () => {
 
@@ -8,9 +9,10 @@ let App = () => {
     return (
         <div className="App">
             <header className="App-header">
-                xd
+                launchx
             </header>
             <main className='container'>
+                <MainLaunch/>
                 <Launchlist/>
             </main>
         </div>
